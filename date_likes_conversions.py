@@ -27,7 +27,7 @@ class DateLikesConversion:
             date_time_array.append(t_time)
 
         for i in range(len(date_time_array)):
-            date_dict[i] = date_time_array[i][:48], date_time_array[i][12:], like_list[i]
+            date_dict[i] = date_time_array[i][:11], date_time_array[i][12:], like_list[i]
 
         return date_dict
 
