@@ -90,7 +90,11 @@ class InstaBot:
             driver.get(links[pic_href])
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             unformatted_stamps.append(driver.find_element_by_tag_name("time").get_attribute("datetime"))
-            likes_text = driver.find_element_by_xpath("//div[@class='Nm9Fw']")
+            try:
+                likes_text = driver.find_element_by_xpath("//div[@class='Nm9Fw']")
+            except IndexError:
+                likes_text = driver.find_element_by_xpath("//div[@class='vJRqr']")
+
             # The return from the lc call with bring back an integer value of likes
             likes_text = lc(likes_text.text).likes_string_to_int()
             # This list now has all of the likes for each picture in an integer list
