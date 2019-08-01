@@ -92,7 +92,7 @@ class InstaBot:
             unformatted_stamps.append(driver.find_element_by_tag_name("time").get_attribute("datetime"))
             try:
                 likes_text = driver.find_element_by_xpath("//div[@class='Nm9Fw']")
-            except IndexError:
+            except ReferenceError:
                 likes_text = driver.find_element_by_xpath("//div[@class='vJRqr']")
 
             # The return from the lc call with bring back an integer value of likes
