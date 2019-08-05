@@ -1,10 +1,10 @@
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 import time
 from date_likes_conversions import DateLikesConversion as cd
 from likes_conversion import LikeConversion as lc
-
 
 
 class InstaBot:
@@ -12,7 +12,10 @@ class InstaBot:
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.driver = webdriver.Chrome("/Users/connorboyce/PycharmProjects/web_scraping/chromedriver")
+        opts = Options()
+        opts.set_headless()
+        assert opts.headless
+        self.driver = webdriver.Chrome("/Users/connorboyce/PycharmProjects/web_scraping/chromedriver", options=opts)
 
     def closeBrowser(self):
         self.driver.close()
@@ -87,15 +90,15 @@ class InstaBot:
         time_stamps2, unformatted_stamps, proper_likes = [], [], []
         value_dict = {}
 
-        for pic_href in range(0, 5):
+        for pic_href in range(0, 1):
             driver.get(links[pic_href])
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             unformatted_stamps.append(driver.find_element_by_tag_name("time").get_attribute("datetime"))
             try:
                 likes_text = driver.find_element_by_xpath("//div[@class='Nm9Fw']")
             except NoSuchElementException:
-                likes_text = driver.find_element_by_xpath("//div[@class='vcOH2']")
-
+                driver.find_element_by_xpath("//span[@class='vcOH2']").click()
+                likes_text = driver.find_element_by_xpath("//div[@class='vJRqr']")
             # The return from the lc call with bring back an integer value of likes
             likes_text = lc(likes_text.text).likes_string_to_int()
             # This list now has all of the likes for each picture in an integer list
