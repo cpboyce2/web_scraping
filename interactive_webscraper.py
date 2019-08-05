@@ -13,6 +13,8 @@ if prompt == '1':
     account_links = bot_object.get_photo_links_by_account(account_name)
     time_and_likes = bot_object.get_time_and_likes(account_links)
     print(time_and_likes)
+    x = time_and_likes[0][2] < time_and_likes[1][2]
+    print(x)
 
 elif prompt == '2':
     hashtag = input("Please enter the hashtag: ")

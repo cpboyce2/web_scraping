@@ -90,7 +90,7 @@ class InstaBot:
         time_stamps2, unformatted_stamps, proper_likes = [], [], []
         value_dict = {}
 
-        for pic_href in range(0, 1):
+        for pic_href in range(0, 10):
             driver.get(links[pic_href])
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             unformatted_stamps.append(driver.find_element_by_tag_name("time").get_attribute("datetime"))
